@@ -34,9 +34,20 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
+		int randomX, randomY, cont=0;
 
 		//TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
+		puntuacion = 0;
 		
+		do {
+			randomX=(int)(Math.random()*10);
+			randomY=(int)(Math.random()*10);
+			
+			if(tablero[randomX][randomY]!=MINA) {
+				tablero[randomX][randomY]=MINA;
+				cont++;
+			}
+		}while(cont<MINAS_INICIALES);
 		
 		
 		//Al final del m�todo hay que guardar el n�mero de minas para las casillas que no son mina:
@@ -57,8 +68,20 @@ public class ControlJuego {
 	 * @param j: posición horizontal de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
-	private int calculoMinasAdjuntas(int i, int j){
-		return 0;
+	private int calculoMinasAdjuntas(int posX, int posY){
+		int contadorMinas=0;
+		
+		for(int i=posX-1; i<=posY+1;i++) {
+			for(int j=posY-1; j<=posY+1;j++) {
+				if(((i>=0)&&(i<=LADO_TABLERO)) && (j>=0)&&(j<=LADO_TABLERO)) {
+					if(tablero[i][j]==MINA) {
+						contadorMinas++;
+					}
+				}
+			}
+		}
+		
+		return contadorMinas;
 	}
 	
 	/**
@@ -68,8 +91,16 @@ public class ControlJuego {
 	 * @param j: posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-	public boolean abrirCasilla(int i, int j){
-		return false;
+	public boolean abrirCasilla(int posX, int posY){
+		if(tablero[posX][posY]!=MINA) {
+			puntuacion++;
+			tablero[posX][posY]=calculoMinasAdjuntas(posX, posY);
+			
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	
