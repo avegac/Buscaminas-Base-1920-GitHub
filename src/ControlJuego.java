@@ -111,10 +111,23 @@ public class ControlJuego {
 	 **/
 	public boolean esFinJuego(){
 		boolean finalizado = false;
+		int casillasAbiertas=0;
 		
 		for(int i=0; i<tablero.length;i++) {
 			for(int j=0; j<tablero[i].length;j++) {
-				
+				if((tablero[i][j]!=MINA)&&(abrirCasilla(i,j)==true)) {
+					if(casillasAbiertas == 80) {
+						finalizado=true;
+					}
+					else {
+						finalizado=false;
+					}
+					
+					casillasAbiertas++;
+				}
+				else {
+					finalizado=false;
+				}
 			}
 		}
 		return finalizado;
@@ -132,7 +145,7 @@ public class ControlJuego {
 			}
 			System.out.println();
 		}
-		System.out.println("\nPuntuación: "+this.puntuacion);
+		System.out.println("\nPuntuaciï¿½n: "+this.puntuacion);
 	}
 
 	/**

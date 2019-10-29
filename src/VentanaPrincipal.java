@@ -189,9 +189,9 @@ public class VentanaPrincipal {
 		panelesJuego[i][j].add(numeroMinas);
 		
 		//Bucle para asignar el color correcto en función del número de minas que indica el JLabel
-		for(int k=0;i<correspondenciaColores.length;k++) {
+		for(int k=0;k<correspondenciaColores.length;k++) {
 			if((Integer.parseInt(numeroMinas.getText()))==correspondenciaColores.length) {
-				numeroMinas.setForeground(correspondenciaColores[i]);
+				numeroMinas.setForeground(correspondenciaColores[k]);
 			}
 		}
 		
@@ -211,7 +211,7 @@ public class VentanaPrincipal {
 			System.out.println("Enhorabuena, has ganado!");
 		}
 		else {
-			System.out.println("BOOM, has perdido.");
+			System.out.println("BOOM, has perdido");
 		}
 	}
 

@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  * Clase que implementa el listener de los botones del Buscaminas.
@@ -33,8 +34,9 @@ public class ActionBoton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Si el botón pulsado es una mina se acaba la partida
-		if(String.valueOf(((JButton)e.getSource()).getText()).equals("-1")){
+		if(ventana.juego.abrirCasilla(posX, posY)==false){
 			ventana.mostrarFinJuego(true);
+			JOptionPane.showMessageDialog(null, "BOOM, perdiste");
 		}
 		//Si el botón pulsado no es una mina mostramos el número indicando las minas que hay a su alrededor
 		else {
