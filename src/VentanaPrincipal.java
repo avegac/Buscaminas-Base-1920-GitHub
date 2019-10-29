@@ -139,7 +139,30 @@ public class VentanaPrincipal {
 	 * M茅todo que inicializa todos los l铆steners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
-		//TODO
+		//A馻dimos listener al bot髇 de comenzar la partida
+		botonEmpezar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getJuego().inicializarPartida();
+				
+				//Eliminamos la ventana actual y creamos una nueva para reiniciar la partida
+				ventana.dispose();
+				ventana = new JFrame();
+				ventana.setBounds(100, 100, 700, 500);
+				ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				juego = new ControlJuego();
+				inicializar();
+				refrescarPantalla();
+			}
+		});
+		
+		//Bucle para a馻dir listeners a todos los botones del buscaminas
+		for(int i=0;i<botonesJuego.length;i++) {
+			for(int j=0;j<botonesJuego.length;j++) {
+				botonesJuego[i][j].addActionListener(new ActionBoton(this,i,j));
+			}
+		}
 	}
 	
 	
@@ -152,11 +175,27 @@ public class VentanaPrincipal {
 	 * - 2 : verde
 	 * - 3 : naranja
 	 * - 4 贸 m谩s : rojo 
-	 * @param i: posici贸n vertical de la celda.
-	 * @param j: posici贸n horizontal de la celda.
+	 * @param i: posici贸n horizontal de la celda.
+	 * @param j: posici贸n vertical de la celda.
 	 */
-	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
+	public void mostrarNumMinasAlrededor(int i, int j) {
+		//Eliminamos el bot髇 pulsado
+		panelesJuego[i][j].remove(botonesJuego[i][j]);
+		
+		//Creamos un JLabel que muestre el n鷐ero que nos devuelva el m閠odo que calcula el n鷐ero de minas que hay alrededor
+		JLabel numeroMinas=new JLabel();
+		
+		numeroMinas.setText(Integer.toString(juego.getMinasAlrededor(i, j)));
+		panelesJuego[i][j].add(numeroMinas);
+		
+		//Bucle para asignar el color correcto en funci髇 del n鷐ero de minas que indica el JLabel
+		for(int k=0;i<correspondenciaColores.length;k++) {
+			if((Integer.parseInt(numeroMinas.getText()))==correspondenciaColores.length) {
+				numeroMinas.setForeground(correspondenciaColores[i]);
+			}
+		}
+		
+		refrescarPantalla();
 	}
 	
 	
@@ -166,14 +205,23 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		porExplosion=juego.esFinJuego();
+		
+		if(porExplosion==true) {
+			System.out.println("Enhorabuena, has ganado!");
+		}
+		else {
+			System.out.println("BOOM, has perdido.");
+		}
 	}
 
 	/**
 	 * M茅todo que muestra la puntuaci贸n por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		//TODO
+		int puntuacion = juego.getPuntuacion();
+		
+		pantallaPuntuacion.setText(Integer.toString(puntuacion));
 	}
 	
 	/**

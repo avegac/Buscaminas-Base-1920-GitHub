@@ -110,7 +110,14 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
 	 **/
 	public boolean esFinJuego(){
-		return false;
+		boolean finalizado = false;
+		
+		for(int i=0; i<tablero.length;i++) {
+			for(int j=0; j<tablero[i].length;j++) {
+				
+			}
+		}
+		return finalizado;
 	}
 	
 	
@@ -125,7 +132,7 @@ public class ControlJuego {
 			}
 			System.out.println();
 		}
-		System.out.println("\nPuntuación: "+puntuacion);
+		System.out.println("\nPuntuaci�n: "+this.puntuacion);
 	}
 
 	/**
@@ -136,7 +143,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		return 0;
+		return calculoMinasAdjuntas(i, j);
 	}
 
 	/**
@@ -144,7 +151,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 	public int getPuntuacion() {
-		return 0;
+		return this.puntuacion;
 	}
 	
 }
