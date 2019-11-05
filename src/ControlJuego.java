@@ -4,9 +4,9 @@ import java.util.Random;
 /**
  * Clase gestora del tablero de juego.
  * Guarda una matriz de enteros representado el tablero.
- * Si hay una mina en una posiciÃ³n guarda el nÃºmero -1
- * Si no hay una mina, se guarda cuÃ¡ntas minas hay alrededor.
- * Almacena la puntuaciÃ³n de la partida
+ * Si hay una mina en una posición guarda el número -1
+ * Si no hay una mina, se guarda cuántas minas hay alrededor.
+ * Almacena la puntuación de la partida.
  * @author jesusredondogarcia
  *
  */
@@ -28,15 +28,15 @@ public class ControlJuego {
 	}
 	
 	
-	/**MÃ©todo para generar un nuevo tablero de partida:
+	/**Método para generar un nuevo tablero de partida:
 	 * @pre: La estructura tablero debe existir. 
-	 * @post: Al final el tablero se habrÃ¡ inicializado con tantas minas como marque la variable MINAS_INICIALES. 
-	 * 			El resto de posiciones que no son minas guardan en el entero cuÃ¡ntas minas hay alrededor de la celda
+	 * @post: Al final el tablero se habrá inicializado con tantas minas como marque la variable MINAS_INICIALES. 
+	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
 		int randomX, randomY, cont=0;
 
-		//TODO: Repartir minas e inicializar puntaciï¿½n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
+		//TODO: Repartir minas e inicializar puntación. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
 		puntuacion = 0;
 		
 		do {
@@ -50,7 +50,7 @@ public class ControlJuego {
 		}while(cont<MINAS_INICIALES);
 		
 		
-		//Al final del mï¿½todo hay que guardar el nï¿½mero de minas para las casillas que no son mina:
+		//Al final del método hay que guardar el número de minas para las casillas que no son mina:
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != MINA){
@@ -60,12 +60,12 @@ public class ControlJuego {
 		}
 	}
 	
-	/**CÃ¡lculo de las minas adjuntas: 
-	 * Para calcular el nÃºmero de minas tenemos que tener en cuenta que no nos salimos nunca del tablero.
-	 * Por lo tanto, como mucho la i y la j valdrÃ¡n LADO_TABLERO-1.
-	 * Por lo tanto, como poco la i y la j valdrÃ¡n 0.
-	 * @param i: posiciÃ³n vertical de la casilla a rellenar
-	 * @param j: posiciÃ³n horizontal de la casilla a rellenar
+	/**Cálculo de las minas adjuntas: 
+	 * Para calcular el número de minas tenemos que tener en cuenta que no nos salimos nunca del tablero.
+	 * Por lo tanto, como mucho la i y la j valdrán LADO_TABLERO-1.
+	 * Por lo tanto, como poco la i y la j valdrán 0.
+	 * @param i: posición vertical de la casilla a rellenar.
+	 * @param j: posición horizontal de la casilla a rellenar.
 	 * @return : El nÃºmero de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int posX, int posY){
